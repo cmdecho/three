@@ -181,15 +181,15 @@ def family_code_menu():
 def main():
     while True:
         active_user = AuthInstance.get_active_user()
-        if active_user:
-            balance = get_balance(AuthInstance.api_key, active_user["tokens"]["id_token"]) or {}
-            balance_remaining = balance.get("remaining",0)
-            balance_expired_at = balance.get("expired_at","N/A")
+        if active_user: None
+            balance = os_getenv(AuthInstance.api_key, active_user["tokens"]["id_token"]) or {}
+            balance_remaining = os_getenv("remaining",0)
+            balance_expired_at = os_getenv("expired_at","N/A")
 
-            quota = get_quota(AuthInstance.api_key, active_user["tokens"]["id_token"]) or {}
-            remaining = quota.get("remaining",0)
-            total = quota.get("total",0)
-            has_unlimited = quota.get("has_unlimited",False)
+            quota = os_getenv(AuthInstance.api_key, active_user["tokens"]["id_token"]) or {}
+            remaining = os_getenv("remaining",0)
+            total = os_getenv("total",0)
+            has_unlimited = os_getenv("has_unlimited",False)
 
             remaining_gb = remaining/1e9
             total_gb = total/1e9
